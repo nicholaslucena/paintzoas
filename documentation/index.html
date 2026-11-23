@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paintzoas · componentes</title>
+<!-- Mesma pilha da loja: variáveis do tema → CSS do Ipanema (CDN da loja) → custom.css.
+     Se o tema for atualizado, os nomes dos arquivos do CDN mudam: copie os novos do <head> da loja. -->
+<link rel="stylesheet" href="tema-variaveis.css">
+<link rel="stylesheet" href="https://dcdn-us.mitiendanube.com/stores/008/463/417/themes/ipanema/style-critical-978c18d8afbbdc8a07adb083715338ca.min.css">
+<link rel="stylesheet" href="https://dcdn-us.mitiendanube.com/stores/008/463/417/themes/ipanema/style-utilities-c0aecd622274e18a4457353665418961.min.css">
+<link rel="stylesheet" href="https://dcdn-us.mitiendanube.com/stores/008/463/417/themes/ipanema/style-async-2155e7ee20efae35287f422de4dc4268.min.css">
+<link rel="stylesheet" href="../nuvemshop/custom.css" id="pz-css">
+<link rel="stylesheet" href="galeria.css">
+</head>
+<body class="doc">
+
+<header class="doc-topo">
+  <div class="doc-topo-marca">
+    <img src="../icones/logo.svg" alt="Paintzoas" width="104" height="43">
+    <span>micro design system</span>
+  </div>
+  <div class="doc-topo-acoes">
+    <span class="doc-status" id="status"></span>
+    <button type="button" class="btn btn-primary btn-small" data-copiar="tudo">copiar CSS completo</button>
+  </div>
+</header>
+
+<div class="doc-corpo">
+<nav class="doc-indice" aria-label="Seções">
+  <a href="#como-usar">como usar</a>
+  <a href="#cores">cores</a>
+  <a href="#tipografia">tipografia</a>
+  <a href="#botoes">botões</a>
+  <a href="#icones">ícones e logo</a>
+  <a href="#card">card de produto</a>
+  <a href="#filtros">checkbox e filtros</a>
+  <a href="#dropdown">ordenar por</a>
+  <a href="#variacoes">chips e variações</a>
+  <a href="#navegacao">menu e navegação</a>
+  <a href="#rodape">rodapé</a>
+  <a href="#telas">aplicado na loja</a>
+  <a href="#css">CSS completo</a>
+</nav>
+
+<main class="doc-conteudo">
+
+<div class="doc-aviso" id="aviso-arquivo" hidden>
+  Aberta direto do arquivo, a galeria não lê o CSS (copiar e ver código ficam desligados) e a fonte não carrega.
+  Abra pelo servidor: dê dois cliques em <b>abrir-galeria.cmd</b> na pasta do projeto.
+</div>
+
+<!-- ============================================================ -->
+<section class="doc-secao" id="como-usar">
+  <h2 class="doc-titulo">como usar</h2>
+  <ol class="doc-passos">
+    <li>
+      <b>Pré-visualizar sem publicar.</b> Dois cliques em <code>preview-loja.cmd</code> (ou <code>preview-celular.cmd</code>).
+      Abre a loja num navegador à parte com este CSS aplicado; cada vez que o <code>custom.css</code> é salvo, a página atualiza.
+      Um botão no canto liga e desliga o CSS para comparar com o tema original. A senha da loja é pedida só na primeira vez.
+    </li>
+    <li>
+      <b>Hospedar a fonte (uma vez).</b> Suba a pasta <code>fonts/</code> na Vercel (já tem o <code>vercel.json</code> com CORS liberado)
+      e troque <code>SEU-PROJETO</code> no começo do CSS pelo endereço real.
+    </li>
+    <li>
+      <b>Publicar.</b> Salve o <code>custom.css</code>, clique em <b>copiar CSS completo</b> e cole em
+      Loja online › Layout › Editar layout › Configurações avançadas › CSS personalizado.
+    </li>
+  </ol>
+  <p class="doc-nota">
+    O arquivo <code>nuvemshop/custom.css</code> é a fonte da verdade; o painel é só destino. Ícones e formas são SVGs nas pastas
+    <code>icones/</code> e <code>formas/</code>: depois de trocar um desenho, rode <code>npm run embutir</code> em <code>ferramentas/</code>
+    para levá-lo ao CSS.
+  </p>
+</section>
+
+<!-- ============================================================ -->
+<section class="doc-secao" id="cores">
+  <h2 class="doc-titulo">cores</h2>
+  <p class="doc-desc">Clique numa cor para copiar o valor.</p>
+  <div class="doc-cores">
+    <button type="button" class="doc-cor" data-hex="#000000" style="--c:#000"><i></i><b>preto</b><span>--pz-preto</span><code>#000000</code></button>
+    <button type="button" class="doc-cor" data-hex="#FFFFFF" style="--c:#fff"><i></i><b>branco</b><span>--pz-branco</span><code>#FFFFFF</code></button>
+    <button type="button" class="doc-cor" data-hex="#707070" style="--c:#707070"><i></i><b>cinza</b><span>--pz-cinza</span><code>#707070</code></button>
+    <button type="button" class="doc-cor" data-hex="#B3B3B3" style="--c:#B3B3B3"><i></i><b>desabilitado</b><span>--pz-desabilitado</span><code>#B3B3B3</code></button>
+    <button type="button" class="doc-cor" data-hex="#D7D7D7" style="--c:#D7D7D7"><i></i><b>divisor</b><span>--pz-divisor</span><code>#D7D7D7</code></button>
+    <button type="button" class="doc-cor" data-hex="#E86363" style="--c:#E86363"><i></i><b>coral (hero)</b><span>--pz-coral</span><code>#E86363</code></button>
+    <button type="button" class="doc-cor" data-hex="#D2E7C3" style="--c:#D2E7C3"><i></i><b>contorno do coral</b><span>--pz-coral-contorno</span><code>#D2E7C3</code></button>
+    <button type="button" class="doc-cor" data-hex="#93D6FD" style="--c:#93D6FD"><i></i><b>azul (h3 especial)</b><span>--pz-azul</span><code>#93D6FD</code></button>
+    <button type="button" class="doc-cor" data-hex="#495DAC" style="--c:#495DAC"><i></i><b>contorno do azul</b><span>--pz-azul-contorno</span><code>#495DAC</code></button>
+    <button type="button" class="doc-cor" data-hex="#FEB9B9" style="--c:#FEB9B9"><i></i><b>rosa do hover</b><span>--pz-rosa-hover</span><code>#FEB9B9</code></button>
+    <button type="button" class="doc-cor" data-hex="#41B77A" style="--c:#41B77A"><i></i><b>verde do desconto</b><span>--pz-verde-desconto</span><code>#41B77A</code></button>
+  </div>
+  <div class="doc-copiar"><button type="button" class="doc-link" data-copiar="tokens">copiar trecho: tokens</button></div>
+</section>
+
+<!-- ============================================================ -->
+<section class="doc-secao" id="tipografia">
+  <h2 class="doc-titulo">tipografia</h2>
+  <p class="doc-desc">
+    Paintzoas (um peso só) é a identidade: títulos, botões, menu, preços, filtros. Helvetica Neue é a fonte complementar das partes
+    burocráticas: descrições, formulários, frete, rodapé legal. Tamanhos de desktop; no celular os títulos encolhem.
+  </p>
+
+  <div class="doc-palco doc-palco-tipos">
+    <div class="doc-tipo">
+      <div data-store="home-slider"><div class="heading-block heading-custom">main hero</div></div>
+      <small>main hero · 96 px (celular 56) · título do slideshow</small>
+    </div>
+    <div class="doc-tipo">
+      <div class="banners-section"><div class="heading-block h1">mini hero</div></div>
+      <small>mini hero · 54 px (celular 40) · título dos banners</small>
+    </div>
+    <div class="doc-tipo"><div class="h1">H1</div><small>H1 · 96 px</small></div>
+    <div class="doc-tipo"><div class="h2">H2 resultados da busca</div><small>H2 · 54 px · título das páginas</small></div>
+    <div class="doc-tipo"><div class="h3">H3 título de bloco</div><small>H3 · 36 px</small></div>
+    <div class="doc-tipo">
+      <div class="section-featured-home"><div class="heading-block h5">em destaque</div></div>
+      <small>H3 especial · 36 px · título das vitrines de produtos</small>
+    </div>
+    <div class="doc-tipo"><div class="h6">tamanho</div><small>H6 · 14 px · rótulos de grupo</small></div>
+  </div>
+
+  <div class="doc-grade-2">
+    <div class="doc-palco">
+      <p class="doc-pz" style="font-size:20px">20 · preço do card</p>
+      <p class="doc-pz" style="font-size:18px">18 · nome do produto</p>
+      <p class="doc-pz" style="font-size:16px">16 · menu, filtros, títulos do rodapé</p>
+      <p class="doc-pz" style="font-size:14px">14 · breadcrumb, ordenar por</p>
+      <p class="doc-pz" style="font-size:12px">12 · parcelas, links do rodapé</p>
+    </div>
+    <div class="doc-palco">
+      <p class="footer-institutional-description">
+        Helvetica Neue entra onde o texto precisa ser lido com calma: a descrição da marca no rodapé, a descrição do produto,
+        os campos de formulário e o frete. Ela já vem instalada em iPhone e Mac; no Windows e no Android a lista cai para Arial.
+      </p>
+      <p class="doc-pz" style="font-size:18px;margin-top:16px">texto com <strong>negrito sintético</strong> do navegador</p>
+    </div>
+  </div>
+
+  <p class="doc-nota">
+    A Paintzoas é unicase: o "i" minúsculo tem pingo e as outras minúsculas parecem maiúsculas. Por isso nada força caixa alta.
+    A fonte veio com alguns caracteres sem desenho. Na versão web (<code>Paintzoas.woff2</code>), <b>â ó ô õ ú</b> minúsculas usam o
+    desenho da maiúscula, e símbolos como <b>( ) / + * ° ª º</b> aparecem na Helvetica. Vale desenhar esses caracteres na fonte original.
+  </p>
+  <div class="doc-copiar">
+    <button type="button" class="doc-link" data-copiar="fonte">copiar trecho: fonte</button>
+    <button type="button" class="doc-link" data-copiar="tipografia">copiar trecho: tipografia</button>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="doc-secao" id="botoes">
+  <h2 class="doc-titulo">botões</h2>
+  <p class="doc-desc">
+    Botão primário "tosquinho": desenho traçado do original, fatiado para esticar com qualquer texto sem deformar os cantos.
+    Funciona em link, botão e campo de envio (o "Comprar" do produto). O hover desenha o contorno rosado fora da caixa, sem empurrar nada.
+  </p>
+  <div class="doc-palco">
+    <table class="doc-tabela-botoes">
+            <tbody>
+        <tr>
+          <th>grande<small>.btn-big · 28 px · slideshow e "Comprar" do produto</small></th>
+          <td data-estado="normal"><a href="#" class="btn btn-primary btn-big">ver ofertas</a></td>
+          <td data-estado="hover / foco"><a href="#" class="btn btn-primary btn-big pz-hover">ver ofertas</a></td>
+          <td data-estado="desabilitado"><span class="btn btn-primary btn-big disabled">ver ofertas</span></td>
+        </tr>
+        <tr>
+          <th>médio<small>.btn-medium e padrão · 20 px · banners, formulários, carrinho</small></th>
+          <td data-estado="normal"><a href="#" class="btn btn-primary btn-medium">ver ofertas</a></td>
+          <td data-estado="hover / foco"><a href="#" class="btn btn-primary btn-medium pz-hover">ver ofertas</a></td>
+          <td data-estado="desabilitado"><span class="btn btn-primary btn-medium disabled">ver ofertas</span></td>
+        </tr>
+        <tr>
+          <th>pequeno<small>.btn-small · 18 px · "Comprar" do card</small></th>
+          <td data-estado="normal"><span class="btn btn-primary btn-small">comprar</span></td>
+          <td data-estado="hover / foco"><span class="btn btn-primary btn-small pz-hover">comprar</span></td>
+          <td data-estado="desabilitado"><span class="btn btn-primary btn-small disabled">comprar</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="doc-grade-2">
+    <div class="doc-palco">
+      <input type="submit" class="btn btn-primary btn-big btn-block" value="Comprar">
+      <small class="doc-legenda">largura total, num &lt;input&gt; · igual ao "Comprar" da página de produto (no celular vira médio)</small>
+    </div>
+    <div class="doc-palco">
+      <a href="#" class="btn btn-secondary">ver tudo</a>
+      <small class="doc-legenda">secundário · sublinhado torto que "pula" no hover. O tema quase não usa; confirmar onde ele aparece.</small>
+    </div>
+  </div>
+  <p class="doc-nota">
+    Para mudar o tamanho, mexa só em <code>--u</code> (1 pixel do desenho). Abaixo de 1px os degraus dos cantos ficam menores que um pixel
+    da tela e arredondam um pouco; é esperado no médio e no pequeno. Contorno do hover é cortado onde algum elemento pai esconde o que vaza
+    (<code>overflow: hidden</code>).
+  </p>
+  <div class="doc-copiar"><button type="button" class="doc-link" data-copiar="botao">copiar trecho: botão primário</button><button type="button" class="doc-link" data-copiar="sublinhado">copiar trecho: sublinhado</button></div>
+</section>
+
+<!-- ============================================================ -->
+<section class="doc-secao" id="icones">
+  <h2 class="doc-titulo">ícones e logo</h2>
+  <p class="doc-desc">
+    Entram no lugar dos ícones do tema como máscara, na cor do texto. Busca, conta e sacola vêm do Figma; menu, fechar, seta e filtro
+    são desenhos novos no mesmo traço (rascunho para avaliar).
+  </p>
+  <div class="doc-icones">
+    <figure>
+      <div class="js-search-container"><button type="button" class="js-search-trigger header-icon"><svg class="utility-icon icon-inline"><use href="#x"/></svg></button></div>
+      <figcaption>busca<small>18 × 24 · Figma</small></figcaption>
+    </figure>
+    <figure>
+      <span class="header-account"><a class="header-icon" href="#"><svg class="utility-icon icon-inline"><use href="#x"/></svg></a></span>
+      <figcaption>conta<small>19 × 24 · Figma</small></figcaption>
+    </figure>
+    <figure>
+      <span class="header-cart"><span class="header-icon"><svg class="utility-icon icon-inline"><use href="#x"/></svg></span></span>
+      <figcaption>sacola<small>23 × 24 · Figma</small></figcaption>
+    </figure>
+    <figure class="doc-novo">
+      <div class="menu-container"><button type="button" class="header-icon"><svg class="utility-icon icon-inline"><use href="#x"/></svg></button></div>
+      <figcaption>menu<small>24 × 24 · novo · cabeçalho no celular</small></figcaption>
+    </figure>
+    <figure class="doc-novo">
+      <button type="button" class="modal-close"><svg class="icon-inline"><use href="#x"/></svg></button>
+      <figcaption>fechar<small>22 × 24 · novo · menu, busca, carrinho</small></figcaption>
+    </figure>
+    <figure class="doc-novo">
+      <svg class="slider-arrow icon-inline"><use href="#x"/></svg>
+      <figcaption>seta<small>34 × 20 · novo · setas do slideshow</small></figcaption>
+    </figure>
+    <figure class="doc-novo">
+      <button type="button" class="category-filter-button"><svg class="category-controls-icon icon-inline"><use href="#x"/></svg></button>
+      <figcaption>filtro<small>24 × 24 · novo · "Filtrar" no celular</small></figcaption>
+    </figure>
+    <figure>
+      <div class="form-select-icon doc-estatico"><svg class="form-select-arrow icon-inline"><use href="#x"/></svg></div>
+      <figcaption>chevron<small>9 × 6 · Figma · menu, selects, filtros</small></figcaption>
+    </figure>
+  </div>
+  <div class="doc-grade-2">
+    <div class="doc-palco doc-logo">
+      <img src="../icones/logo.svg" alt="Logo Paintzoas" width="130" height="54">
+      <small class="doc-legenda">
+        O logo é uma imagem que sobe no painel (Layout › Cabeçalho), não CSS.
+        <a href="../icones/logo-paintzoas@3x.png" download>baixar PNG 3×</a> · <a href="../icones/logo.svg" download>baixar SVG</a>
+      </small>
+    </div>
+    <div class="doc-palco">
+      <p class="doc-legenda" style="margin-top:0">
+        Os novos foram gerados por <code>ferramentas/icones/desenhar.mjs</code>: pincel redondo, tremido leve, contorno em degraus
+        como o MS Paint vetorizado. Para outra variação do tremido: <code>node desenhar.mjs --semente=7</code>.
+        Para trocar por um desenho seu, salve o SVG com o mesmo nome em <code>icones/</code> e rode <code>npm run embutir</code>.
+      </p>
+    </div>
+  </div>
+  <div class="doc-copiar"><button type="button" class="doc-link" data-copiar="cabecalho">copiar trecho: cabeçalho e ícones</button></div>
+</section>
+
+<!-- ============================================================ -->
+<section class="doc-secao" id="card">
+  <h2 class="doc-titulo">card de produto</h2>
+  <p class="doc-desc">Chips de cor no topo, nome, preço antigo riscado, preço com desconto em verde, parcelas e o "Comprar" pequeno no pé do card.</p>
+  <div class="doc-cards">
+    <div class="product-item">
+      <div class="product-item-image-container doc-foto"></div>
+      <div class="product-item-information">
+        <a class="product-item-link" href="#">
+          <div class="product-item-name">Produto Lorem Ipsum</div>
+          <div class="product-item-price-container"><span class="product-item-price">R$ 1.000,99</span></div>
+          <div class="product-item-installments"><div class="product-installments">12 x 99,90</div></div>
+          <div class="product-item-colors-container order-first"><div class="product-item-colors">
+            <span class="product-item-colors-bullet" style="background:#FFA4A4"></span><span class="product-item-colors-bullet" style="background:#4C7CC4"></span><span class="product-item-colors-bullet" style="background:#985336"></span>
+          </div></div>
+        </a>
+        <div class="product-item-quick-shop-container"><span class="btn btn-primary btn-small">comprar</span></div>
+      </div>
+    </div>
+    <div class="product-item">
+      <div class="product-item-image-container doc-foto"></div>
+      <div class="product-item-information">
+        <a class="product-item-link" href="#">
+          <div class="product-item-name">Produto Lorem Ipsum</div>
+          <div class="product-item-price-container">
+            <span class="product-item-price">R$ 1.000,99</span>
+            <span class="product-item-price-compare">R$ 1.333,99</span>
+            <span class="product-item-discount"><span>25</span>% off</span>
+          </div>
+          <div class="product-item-installments"><div class="product-installments">12 x 99,90</div></div>
+        </a>
+        <div class="product-item-quick-shop-container"><span class="btn btn-primary btn-small">comprar</span></div>
+      </div>
+    </div>
+    <div class="product-item">
+      <div class="product-item-image-container doc-foto"></div>
+      <div class="product-item-information">
+        <a class="product-item-link" href="#">
+          <div class="product-item-name">Produto com nome comprido para quebrar a linha</div>
+          <div class="product-item-price-container">
+            <span class="product-item-price">R$ 89,90</span>
+            <span class="product-item-price-compare">R$ 119,90</span>
+            <span class="product-item-discount"><span>25</span>% off</span>
+          </div>
+          <div class="product-item-colors-container order-first"><div class="product-item-colors">
+            <span class="product-item-colors-bullet" style="background:#FFA4A4"></span><span class="product-item-colors-bullet" style="background:#4C7CC4"></span>
+          </div></div>
+        </a>
+        <div class="product-item-quick-shop-container"><span class="btn btn-primary btn-small">comprar</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="doc-copiar"><button type="button" class="doc-link" data-copiar="card">copiar trecho: card</button></div>
+</section>
+
+<!-- ============================================================ -->
+<section class="doc-secao" id="filtros">
+  <h2 class="doc-titulo">checkbox e filtros</h2>
+  <p class="doc-desc">Caixa desenhada à mão na cor do texto: desabilitado fica cinza sem precisar de outro desenho.</p>
+  <div class="doc-grade-2">
+    <div class="doc-palco doc-checks">
+      <label class="checkbox-container"><input type="checkbox"><span class="checkbox"><span class="checkbox-icon"></span><span class="checkbox-text">P</span></span></label>
+      <label class="checkbox-container"><input type="checkbox" checked><span class="checkbox"><span class="checkbox-icon"></span><span class="checkbox-text">P</span></span></label>
+      <label class="checkbox-container"><input type="checkbox" disabled><span class="checkbox"><span class="checkbox-icon"></span><span class="checkbox-text">P</span></span></label>
+      <label class="checkbox-container"><input type="checkbox" checked disabled><span class="checkbox"><span class="checkbox-icon"></span><span class="checkbox-text">P</span></span></label>
+      <small class="doc-legenda">normal · marcado · desabilitado · desabilitado marcado (clique para testar)</small>
+    </div>
+    <div class="doc-palco">
+      <h2 class="filters-desktop-heading">Filtrar por</h2>
+      <div class="filter-accordion">
+        <div class="accordion-toggle-label">tamanho</div>
+        <label class="checkbox-container"><input type="checkbox"><span class="checkbox"><span class="checkbox-icon"></span><span class="checkbox-text">P (3)</span></span></label>
+        <label class="checkbox-container"><input type="checkbox" checked><span class="checkbox"><span class="checkbox-icon"></span><span class="checkbox-text">M (3)</span></span></label>
+        <label class="checkbox-container"><input type="checkbox"><span class="checkbox"><span class="checkbox-icon"></span><span class="checkbox-text">G (4)</span></span></label>
+      </div>
+    </div>
+  </div>
+  <div class="doc-copiar"><button type="button" class="doc-link" data-copiar="checkbox">copiar trecho: checkbox</button></div>
+</section>
+
+<!-- ============================================================ -->
+<section class="doc-secao" id="dropdown">
+  <h2 class="doc-titulo">ordenar por</h2>
+  <p class="doc-desc">Select nativo (a lista que abre é a do sistema), com a caixa desenhada e o chevron do Figma. No foco por teclado a caixa fica preta.</p>
+  <div class="doc-palco">
+    <div class="product-list-sort-by"><div class="doc-inline">
+      <div class="form-group">
+        <label class="form-label" for="ordem">ordenar por</label>
+        <select id="ordem" class="form-select form-select-small">
+          <option>relevância</option><option>preço: menor ao maior</option><option>preço: maior ao menor</option><option>mais vendidos</option>
+        </select>
+        <div class="form-select-icon"><svg class="form-select-arrow icon-inline"><use href="#x"/></svg></div>
+      </div>
+    </div></div>
+  </div>
+  <div class="doc-copiar"><button type="button" class="doc-link" data-copiar="dropdown">copiar trecho: ordenar por</button></div>
+</section>
+
+<!-- ============================================================ -->
+<section class="doc-secao" id="variacoes">
+  <h2 class="doc-titulo">chips e variações</h2>
+  <p class="doc-desc">O chip de cor usa o recorte do Figma sobre a cor que vem do produto. Na página de produto, as variações ganham a mesma caixa desenhada do select.</p>
+  <div class="doc-grade-2">
+    <div class="doc-palco">
+      <div class="product-item-colors">
+        <span class="product-item-colors-bullet" style="background:#FFA4A4"></span><span class="product-item-colors-bullet" style="background:#4C7CC4"></span><span class="product-item-colors-bullet" style="background:#985336"></span><span class="product-item-colors-bullet" style="background:#000"></span>
+      </div>
+      <small class="doc-legenda">chips do card · 13 × 13</small>
+    </div>
+    <div class="doc-palco">
+      <div class="js-product-variants"><div class="form-label">Tamanho: <strong>M</strong></div>
+      <a href="#" class="btn btn-variant">P</a><a href="#" class="btn btn-variant selected">M</a><a href="#" class="btn btn-variant">G</a><a href="#" class="btn btn-variant">GG</a></div>
+      <small class="doc-legenda">variações · selecionada em preto</small>
+    </div>
+  </div>
+  <div class="doc-copiar"><button type="button" class="doc-link" data-copiar="chips">copiar trecho: chips e variações</button></div>
+</section>
+
+<!-- ============================================================ -->
+<section class="doc-secao" id="navegacao">
+  <h2 class="doc-titulo">menu e navegação</h2>
+  <p class="doc-desc">Menu em Paintzoas 16 px com sublinhado torto no hover e na página atual; breadcrumb; bolinhas do carrossel.</p>
+  <div class="doc-palco">
+    <nav class="nav-desktop doc-nav"><ul class="nav-desktop-list list-unstyled">
+      <li class="nav-item nav-main-item"><a class="nav-list-link selected" href="#">início</a></li>
+      <li class="nav-item nav-main-item"><a class="nav-list-link" href="#">produtos <svg class="nav-list-link-icon icon-inline"><use href="#x"/></svg></a></li>
+      <li class="nav-item nav-main-item"><a class="nav-list-link pz-hover" href="#">contato</a></li>
+    </ul></nav>
+    <small class="doc-legenda">página atual (início) · normal · hover (contato)</small>
+  </div>
+  <div class="doc-grade-2">
+    <div class="doc-palco">
+      <div class="breadcrumbs"><a class="crumb" href="#">início</a><span class="separator">&gt;</span><span class="crumb active">resultados da busca</span></div>
+      <small class="doc-legenda">breadcrumb · 14 px</small>
+    </div>
+    <div class="doc-palco">
+      <div class="swiper-pagination-bullets doc-estatico"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+      <small class="doc-legenda">bolinhas do carrossel · ativa e inativas</small>
+    </div>
+  </div>
+  <div class="doc-copiar">
+    <button type="button" class="doc-link" data-copiar="sublinhado">copiar trecho: sublinhado</button>
+    <button type="button" class="doc-link" data-copiar="paginacao">copiar trecho: paginação e breadcrumb</button>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<section class="doc-secao" id="rodape">
+  <h2 class="doc-titulo">rodapé</h2>
+  <div class="doc-palco doc-rodape">
+    <p class="footer-institutional-description">Lorem ipsum este é o texto descritivo no rodapé, em Helvetica Neue, para os pedaços mais burocráticos.</p>
+    <div><div class="footer-menu-title">informações</div><ul class="footer-menu-list list-unstyled"><li><a href="#">início</a></li><li><a href="#">produtos</a></li><li><a href="#">contato</a></li></ul></div>
+    <div><div class="footer-menu-title">ajuda</div><ul class="footer-menu-list list-unstyled"><li><a href="#">trocas e devoluções</a></li><li><a href="#">perguntas frequentes</a></li></ul></div>
+  </div>
+  <div class="doc-copiar"><button type="button" class="doc-link" data-copiar="rodape">copiar trecho: rodapé</button></div>
+</section>
+
+<!-- ============================================================ -->
+<section class="doc-secao" id="telas">
+  <h2 class="doc-titulo">aplicado na loja</h2>
+  <p class="doc-desc">
+    Fotos tiradas com <code>npm run fotos -- --demo</code> (loja demo do Ipanema, com produtos) e <code>npm run fotos</code> (loja Paintzoas,
+    depois de destravar a senha no preview). Clique para abrir inteira.
+  </p>
+  <div class="doc-telas" id="telas-lista"></div>
+</section>
+
+<!-- ============================================================ -->
+<section class="doc-secao" id="css">
+  <h2 class="doc-titulo">CSS completo</h2>
+  <p class="doc-desc">Cada trecho depende de <b>tokens</b> (cores e fontes) e de <b>desenhos embutidos</b> (os SVGs). Para publicar, copie sempre o completo.</p>
+  <div class="doc-copiar" style="margin-bottom:16px">
+    <button type="button" class="btn btn-primary btn-small" data-copiar="tudo">copiar CSS completo</button>
+    <a class="doc-link" href="../nuvemshop/custom.css" download>baixar custom.css</a>
+  </div>
+  <div id="css-trechos"></div>
+</section>
+
+</main>
+</div>
+
+<div class="doc-toast" id="toast" role="status" aria-live="polite"></div>
+<script src="galeria.js"></script>
+</body>
+</html>
