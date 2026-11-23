@@ -1,7 +1,11 @@
-// Galeria: copiar CSS, mostrar o código por trecho, forçar estados de hover e
-// recarregar sozinha quando o custom.css muda (servidor local: npm run galeria).
+// Galeria: copiar o CSS do painel, mostrar o código legível por trecho, forçar estados
+// de hover e recarregar sozinha quando o custom.css muda (servidor local: npm run galeria).
 (() => {
   const URL_CSS = '../nuvemshop/custom.css';
+  const URL_PAINEL = '../nuvemshop/painel.css';   // versão compacta, a que vai para o painel
+  const LIMITE = 15000;                            // caracteres aceitos pelo campo da Nuvemshop
+  const mil = n => n.toLocaleString('pt-BR');
+  async function painel() { const r = await fetch(URL_PAINEL, { cache: 'no-store' }); if (!r.ok) throw new Error(r.status); return r.text(); }
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   let texto = '';
@@ -63,7 +67,8 @@
     if (novo === texto) return;
     const mudou = !!texto; texto = novo; trechos = separar(texto);
     montarTrechos();
-    $('#status').textContent = `custom.css · ${kb(texto)}`;
+    painel().then(p => { $('#status').textContent = `painel.css · ${mil(p.length)} de ${mil(LIMITE)} caracteres`; })
+      .catch(() => { $('#status').textContent = `custom.css · ${kb(texto)}`; });
     if (mudou) {
       const link = $('#pz-css'); const n = link.cloneNode(); n.href = URL_CSS + '?v=' + Date.now();
       n.onload = () => { link.remove(); clonarHover(); }; link.after(n);
@@ -79,9 +84,15 @@
     if (b) {
       e.preventDefault();
       if (!texto) return toast('Abra pela galeria (abrir-galeria.cmd) para copiar');
-      const id = b.dataset.copiar; const str = id === 'tudo' ? texto : trechos[id]?.css;
+      const id = b.dataset.copiar;
+      if (id === 'tudo') {
+        let p; try { p = await painel(); } catch { return toast('painel.css não encontrado (npm run painel)'); }
+        if (p.length > LIMITE) return toast(`painel.css passou do limite: ${mil(p.length)} caracteres`);
+        return toast((await copiar(p)) ? `Copiado: CSS do painel (${mil(p.length)} de ${mil(LIMITE)} caracteres)` : 'Não deu para copiar');
+      }
+      const str = trechos[id]?.css;
       if (!str) return toast('Trecho não encontrado');
-      toast((await copiar(str)) ? `Copiado: ${id === 'tudo' ? 'CSS completo' : trechos[id].titulo} (${kb(str)})` : 'Não deu para copiar');
+      toast((await copiar(str)) ? `Copiado: ${trechos[id].titulo}, versão legível (${kb(str)})` : 'Não deu para copiar');
       return;
     }
     const c = e.target.closest('.doc-cor');

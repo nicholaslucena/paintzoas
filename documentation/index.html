@@ -22,7 +22,7 @@
   </div>
   <div class="doc-topo-acoes">
     <span class="doc-status" id="status"></span>
-    <button type="button" class="btn btn-primary btn-small" data-copiar="tudo">copiar CSS completo</button>
+    <button type="button" class="btn btn-primary btn-small" data-copiar="tudo">copiar CSS do painel</button>
   </div>
 </header>
 
@@ -47,7 +47,7 @@
 
 <div class="doc-aviso" id="aviso-arquivo" hidden>
   Aberta direto do arquivo, a galeria não lê o CSS (copiar e ver código ficam desligados) e a fonte não carrega.
-  Abra pelo servidor: dê dois cliques em <b>abrir-galeria.cmd</b> na pasta do projeto.
+  Abra pelo servidor: em <code>ferramentas/</code>, rode <code>npm run galeria</code>.
 </div>
 
 <!-- ============================================================ -->
@@ -55,23 +55,27 @@
   <h2 class="doc-titulo">como usar</h2>
   <ol class="doc-passos">
     <li>
-      <b>Pré-visualizar sem publicar.</b> Dois cliques em <code>preview-loja.cmd</code> (ou <code>preview-celular.cmd</code>).
-      Abre a loja num navegador à parte com este CSS aplicado; cada vez que o <code>custom.css</code> é salvo, a página atualiza.
+      <b>Pré-visualizar sem publicar.</b> Em <code>ferramentas/</code>, rode <code>npm run preview</code> (ou <code>npm run preview:celular</code>).
+      Abre a loja num navegador à parte com o CSS do painel aplicado; cada vez que o <code>custom.css</code> é salvo, a página atualiza.
       Um botão no canto liga e desliga o CSS para comparar com o tema original. A senha da loja é pedida só na primeira vez.
     </li>
     <li>
-      <b>Hospedar a fonte (uma vez).</b> Suba a pasta <code>fonts/</code> na Vercel (já tem o <code>vercel.json</code> com CORS liberado)
-      e troque <code>SEU-PROJETO</code> no começo do CSS pelo endereço real.
+      <b>Hospedar (uma vez, e de novo a cada desenho novo).</b> Suba o repositório na Vercel (o <code>vercel.json</code> da raiz libera o acesso)
+      e troque <code>SEU-PROJETO</code> no começo do <code>custom.css</code> pelo endereço real. De lá vêm a fonte e os desenhos de
+      <code>icones/</code> e <code>formas/</code> que não cabem no campo do painel.
     </li>
     <li>
-      <b>Publicar.</b> Salve o <code>custom.css</code>, clique em <b>copiar CSS completo</b> e cole em
+      <b>Publicar.</b> Salve o <code>custom.css</code>, clique em <b>copiar CSS do painel</b> e cole em
       Loja online › Layout › Editar layout › Configurações avançadas › CSS personalizado.
+      O campo aceita até 15.000 caracteres: o que vai para lá é o <code>painel.css</code>, a versão compacta do <code>custom.css</code>
+      (mesmo desenho, conferido pixel a pixel com <code>npm run comparar</code>).
     </li>
   </ol>
   <p class="doc-nota">
-    O arquivo <code>nuvemshop/custom.css</code> é a fonte da verdade; o painel é só destino. Ícones e formas são SVGs nas pastas
+    O arquivo <code>nuvemshop/custom.css</code> é a fonte da verdade; o <code>painel.css</code> é gerado a partir dele
+    (<code>npm run painel</code>, ou sozinho ao copiar por aqui). Ícones e formas são SVGs nas pastas
     <code>icones/</code> e <code>formas/</code>: depois de trocar um desenho, rode <code>npm run embutir</code> em <code>ferramentas/</code>
-    para levá-lo ao CSS.
+    e suba o repositório de novo na Vercel.
   </p>
 </section>
 
@@ -429,9 +433,11 @@
 <!-- ============================================================ -->
 <section class="doc-secao" id="css">
   <h2 class="doc-titulo">CSS completo</h2>
-  <p class="doc-desc">Cada trecho depende de <b>tokens</b> (cores e fontes) e de <b>desenhos embutidos</b> (os SVGs). Para publicar, copie sempre o completo.</p>
+  <p class="doc-desc">Abaixo, o <code>custom.css</code> legível, por trecho, para consulta. Cada trecho depende de <b>tokens</b> (cores e fontes)
+    e dos <b>desenhos</b> (os SVGs). Para publicar, use sempre <b>copiar CSS do painel</b>: os trechos legíveis não cabem no campo.</p>
   <div class="doc-copiar" style="margin-bottom:16px">
-    <button type="button" class="btn btn-primary btn-small" data-copiar="tudo">copiar CSS completo</button>
+    <button type="button" class="btn btn-primary btn-small" data-copiar="tudo">copiar CSS do painel</button>
+    <a class="doc-link" href="../nuvemshop/painel.css" download>baixar painel.css</a>
     <a class="doc-link" href="../nuvemshop/custom.css" download>baixar custom.css</a>
   </div>
   <div id="css-trechos"></div>
